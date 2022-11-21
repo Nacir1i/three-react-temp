@@ -8,11 +8,19 @@ class Scene {
     this.scene = new THREE.Scene();
     this.camera = new Camera().camera;
     this.renderer = new Renderer().renderer;
-    this.Objects = new Objects();
+    this.objects = new Objects();
+    this.cube = this.objects.Cube();
   }
 
   Initiate() {
-    this.scene.add(this.Objects.Cube());
+    this.scene.add(this.cube);
+    this.renderer.setAnimationLoop((time) => {
+      this.Animation(time);
+    });
+  }
+
+  Animation(time) {
+    this.objects.CubeAnimation(time);
     this.renderer.render(this.scene, this.camera);
   }
 }

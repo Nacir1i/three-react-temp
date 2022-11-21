@@ -2,19 +2,18 @@ import * as THREE from "three";
 
 class Objects {
   constructor() {
-    this.cube = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+    this.cubeGeometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
     this.cuebMaterial = new THREE.MeshNormalMaterial();
-    this.cuebMesh = new THREE.Mesh(this.cube, this.cuebMaterial);
+    this.cube = new THREE.Mesh(this.cubeGeometry, this.cuebMaterial);
   }
 
   Cube() {
-    return this.cuebMesh;
+    return this.cube;
   }
 
-  CubeAnimation(renderer, scene, camera) {
-    this.cuebMesh.rotation.x = 0.1 / 2000;
-    this.cuebMesh.rotation.y = 0.1 / 1000;
-    renderer.Render(scene, camera);
+  CubeAnimation(time) {
+    this.cube.rotation.x = time / 2000;
+    this.cube.rotation.y = time / 1000;
   }
 }
 

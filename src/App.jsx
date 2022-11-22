@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import Scene from "./lib/Scene";
+import World from "./three/World";
 
 export default function App() {
   useEffect(() => {
-    const scene = new Scene();
+    const container = document.getElementById("container");
+    const world = new World(container);
 
-    scene.Initiate();
+    world.render();
   }, []);
 
-  return <div className="bg-red-400"></div>;
+  return <div className="w-screen h-screen bg-red-400" id="container"></div>;
 }

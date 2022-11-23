@@ -19,13 +19,17 @@ class World {
     cube = createCube();
     light = createLight();
 
-    this.resizer = new Resizer(container, renderer, camera);
+    const resizer = new Resizer(container, camera, renderer);
+    resizer.onResize = () => {
+      this.render();
+    };
+
+    scene.add(cube, light);
 
     container.appendChild(renderer.domElement);
   }
 
   render() {
-    scene.add(cube, light);
     renderer.render(scene, camera);
   }
 }

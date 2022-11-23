@@ -1,10 +1,11 @@
-import { BoxGeometry, MeshStandardMaterial, Mesh } from "three";
+import { BoxGeometry, MeshStandardMaterial, Mesh, MathUtils } from "three";
 
 const createCube = () => {
   const cubeGeometry = new BoxGeometry(2, 2, 2);
-  const cuebMaterial = new MeshStandardMaterial({ color: "peachpuff" });
+  const cuebMaterial = new MeshStandardMaterial({ color: "skyblue" });
   const cube = new Mesh(cubeGeometry, cuebMaterial);
-  cube.rotation.set(-0.5, -0.1, 0.8);
+  cube.rotation.x = MathUtils.degToRad(40);
+  cube.rotation.y = MathUtils.degToRad(45);
 
   return cube;
 };

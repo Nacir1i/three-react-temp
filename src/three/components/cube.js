@@ -4,8 +4,12 @@ const createCube = () => {
   const cubeGeometry = new BoxGeometry(2, 2, 2);
   const cuebMaterial = new MeshStandardMaterial({ color: "skyblue" });
   const cube = new Mesh(cubeGeometry, cuebMaterial);
-  cube.rotation.x = MathUtils.degToRad(40);
-  cube.rotation.y = MathUtils.degToRad(45);
+  const radiosToRotate = MathUtils.degToRad(30);
+
+  cube.tick = (delta) => {
+    cube.rotation.x += radiosToRotate * delta;
+    cube.rotation.y += radiosToRotate * delta;
+  };
 
   return cube;
 };

@@ -6,7 +6,7 @@ export default function App() {
     const container = document.getElementById("container");
     const world = new World(container);
 
-    world.render();
+    world.start();
   }, []);
 
   return <div className="w-screen h-screen bg-red-400" id="container"></div>;

@@ -4,12 +4,14 @@ import createRenderer from "./components/renderer";
 import createLight from "./components/light";
 import createCube from "./components/cube";
 import Resizer from "./systems/Resizer";
+import Loop from "./systems/Loop";
 
 let scene;
 let camera;
 let renderer;
 let cube;
 let light;
+let loop;
 
 class World {
   constructor(container) {
@@ -19,10 +21,8 @@ class World {
     cube = createCube();
     light = createLight();
 
-    const resizer = new Resizer(container, camera, renderer);
-    resizer.onResize = () => {
-      this.render();
-    };
+    loop = new Loop(camera, scene, renderer, [cube]);
+    this.resizer = new Resizer(container, camera, renderer);
 
     scene.add(cube, light);
 
@@ -30,7 +30,15 @@ class World {
   }
 
   render() {
-    renderer.render(scene, camera);
+    renderer.render(this.scene, this.camera);
+  }
+
+  start() {
+    loop.start();
+  }
+
+  stop() {
+    loop.stop();
   }
 }
 

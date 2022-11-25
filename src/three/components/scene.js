@@ -1,8 +1,12 @@
-import { Scene, Color } from "three";
+import { Scene, Color, AxesHelper, GridHelper } from "three";
 
 const createScene = () => {
   const scene = new Scene();
-  scene.background = new Color("black");
+  const axesHelper = new AxesHelper(10);
+  const gridHelper = new GridHelper(10);
+
+  scene.background = new Color("skyblue");
+  scene.add(axesHelper, gridHelper);
 
   return scene;
 };

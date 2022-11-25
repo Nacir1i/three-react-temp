@@ -1,44 +1,47 @@
 import createCamera from "./components/camera";
 import createScene from "./components/scene";
 import createRenderer from "./components/renderer";
-import createLight from "./components/light";
-import createCube from "./components/cube";
+import createLight from "./components/lights";
+import createMeshs from "./components/objects/mesh";
 import Resizer from "./systems/Resizer";
 import Loop from "./systems/Loop";
-
-let scene;
-let camera;
-let renderer;
-let cube;
-let light;
-let loop;
+import creatControls from "./systems/controls";
 
 class World {
+  #scene;
+  #camera;
+  #renderer;
+  #loop;
+  #controls;
+  #resizer;
+
   constructor(container) {
-    scene = createScene();
-    camera = createCamera();
-    renderer = createRenderer();
-    cube = createCube();
-    light = createLight();
+    this.#scene = createScene();
+    this.#camera = createCamera();
+    this.#renderer = createRenderer();
+    const { directLight, ambLight } = createLight();
+    const { text } = createMeshs("lolrandomxd");
 
-    loop = new Loop(camera, scene, renderer, [cube]);
-    this.resizer = new Resizer(container, camera, renderer);
+    this.#resizer = new Resizer(container, this.#camera, this.#renderer);
+    this.#controls = creatControls(this.#camera, this.#renderer.domElement);
+    this.#loop = new Loop(this.#camera, this.#scene, this.#renderer, [
+      this.#controls,
+    ]);
 
-    scene.add(cube, light);
-
-    container.appendChild(renderer.domElement);
+    this.#scene.add(text, directLight, ambLight);
+    container.appendChild(this.#renderer.domElement);
   }
 
   render() {
-    renderer.render(this.scene, this.camera);
+    this.#renderer.render(this.#scene, this.#camera);
   }
 
   start() {
-    loop.start();
+    this.#loop.start();
   }
 
   stop() {
-    loop.stop();
+    this.#loop.stop();
   }
 }
 

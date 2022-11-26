@@ -25,7 +25,6 @@ class Loop {
     const delta = clock.getDelta();
     for (const object of this.objects) {
       object.tick(delta);
-      //   console.log(object);
     }
   }
 }

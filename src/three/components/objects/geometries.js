@@ -3,7 +3,8 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 const createGeometries = async (message) => {
   const laoder = new FontLoader();
-  const font = await laoder.loadAsync("/src/three/assets/fonts/GodOfWar.json");
+  const font = await laoder.loadAsync(`/src/assets/fonts/GodOfWar.json`);
+  console.log();
   const textGeometry = new TextGeometry(message, {
     font: font,
     size: 1,

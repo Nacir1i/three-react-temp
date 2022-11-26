@@ -8,7 +8,7 @@ export default function App() {
         const container = document.getElementById("container");
         const world = new World(container);
 
-        await world.initiate("is is what it is");
+        await world.initiate("it is what it is");
         world.start();
       } catch (error) {
         console.log("error : ", error);

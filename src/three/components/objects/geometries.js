@@ -1,10 +1,11 @@
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import jsonFont from "../../../assets/fonts/GodOfWar.json";
 
 const createGeometries = async (message) => {
+  console.log(jsonFont);
   const laoder = new FontLoader();
-  const font = await laoder.loadAsync(`/src/assets/fonts/GodOfWar.json`);
-  console.log();
+  const font = laoder.parse(jsonFont);
   const textGeometry = new TextGeometry(message, {
     font: font,
     size: 1,

@@ -3,7 +3,6 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import jsonFont from "../../../assets/fonts/GodOfWar.json";
 
 const createGeometries = async (message) => {
-  console.log(jsonFont);
   const laoder = new FontLoader();
   const font = laoder.parse(jsonFont);
   const textGeometry = new TextGeometry(message, {

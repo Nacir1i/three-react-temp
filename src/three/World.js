@@ -3,6 +3,8 @@ import createScene from "./components/scene";
 import createRenderer from "./components/renderer";
 import createLight from "./components/lights";
 import createMeshs from "./components/objects/meshs";
+import loadRobot from "./components/robot";
+// import loadHorse from "./components/horse";
 import Resizer from "./systems/Resizer";
 import Loop from "./systems/Loop";
 import creatControls from "./systems/controls";
@@ -29,11 +31,17 @@ class World {
   async initiate(message) {
     const { directLight, ambLight } = createLight();
     const { text } = await createMeshs(message);
+    const robot = await loadRobot();
+    // const horse = await loadHorse();
 
     this.#loop = new Loop(this.#camera, this.#scene, this.#renderer, [
       this.#controls,
+      robot,
     ]);
-    this.#scene.add(text, directLight, ambLight);
+
+    this.#camera.position.y = 5;
+    this.#controls.target.copy(robot.position);
+    this.#scene.add(text, robot, directLight, ambLight);
   }
 
   render() {
